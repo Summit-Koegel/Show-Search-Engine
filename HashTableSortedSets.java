@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class HashTableSortedSets<KeyType, ValueType extends Comparable<ValueType>>
@@ -15,10 +15,11 @@ public class HashTableSortedSets<KeyType, ValueType extends Comparable<ValueType
 	public void add(KeyType key, ValueType value) {
 		// create new list for key if needed, otherwise add value
 		if (!super.containsKey(key)) {
-			super.put(key, new ArrayList<ValueType>());
+			super.put(key, new LinkedList<ValueType>());
 			super.get(key).add(value);
 		} else {
 			super.get(key).add(value);
+			super.size++;
 		}
 		// sort the list via selection sort
 		ValueType smallest = null;
