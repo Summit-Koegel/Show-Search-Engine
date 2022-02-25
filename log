@@ -1,0 +1,50 @@
+Script started on 2022-02-25 07:33:13+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="94" LINES="50"]
+git status
+git log -1
+make clean
+ls
+make runTests
+exit]0;skoegel@bash-activity01: ~/Project1_DQ_red[01;32mskoegel@bash-activity01[00m:[01;34m~/Project1_DQ_red[00m$ git status
+On branch FrontendDeveloper
+Your branch is up to date with 'origin/FrontendDeveloper'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31mMakefile[m
+	[31mlog[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+]0;skoegel@bash-activity01: ~/Project1_DQ_red[01;32mskoegel@bash-activity01[00m:[01;34m~/Project1_DQ_red[00m$ git log -1
+[?1h=[33mcommit d1245071eec47cc61a08db32e10bbb910439c2a5[m[33m ([m[1;36mHEAD -> [m[1;32mFrontendDeveloper[m[33m, [m[1;31morigin/FrontendDev[m [33m[m[33m[m[1;36m[m[1;32m[m[33m[m[1;31meloper[m[33m)[m[m
+Author: summit <skoegel@wisc.edu>[m
+Date:   Fri Feb 25 06:52:49 2022 +0000[m
+[m
+    final programs[m
+[K[?1l>]0;skoegel@bash-activity01: ~/Project1_DQ_red[01;32mskoegel@bash-activity01[00m:[01;34m~/Project1_DQ_red[00m$ make clean
+rm *.class
+rm: cannot remove '*.class': No such file or directory
+make: *** [Makefile:26: clean] Error 1
+]0;skoegel@bash-activity01: ~/Project1_DQ_red[01;32mskoegel@bash-activity01[00m:[01;34m~/Project1_DQ_red[00m$ ls
+FrontendDeveloperTests.java  IShowSearcherFrontend.java  ShowSearcherBackend.java
+IHashTableSortedSets.java    Makefile                    ShowSearcherFrontend.java
+IShow.java                   MapADT.java                 TextUITester.java
+IShowLoader.java             Show.java                   log
+IShowSearcherBackend.java    ShowSearcherApp.java        tv_shows.csv
+]0;skoegel@bash-activity01: ~/Project1_DQ_red[01;32mskoegel@bash-activity01[00m:[01;34m~/Project1_DQ_red[00m$ make runTests
+javac IShowSearcherFrontend.java
+javac IShowSearcherBackend.java
+make: Circular ShowSearcherBackend.class <- ShowSearcherFrontend.class dependency dropped.
+javac Show.java
+javac ShowSearcherBackend.java
+javac ShowSearcherFrontend.java
+javac FrontendDeveloperTests.java
+java FrontendDeveloperTests
+true
+true
+true
+true
+true
+]0;skoegel@bash-activity01: ~/Project1_DQ_red[01;32mskoegel@bash-activity01[00m:[01;34m~/Project1_DQ_red[00m$ exitgit add[K[K[K[K[K[K[K
+exit
+
+Script done on 2022-02-25 07:33:35+00:00 [COMMAND_EXIT_CODE="0"]
