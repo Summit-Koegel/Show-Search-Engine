@@ -62,7 +62,7 @@ IShowSearcherBackend.class: IShowSearcherBackend.java
 
 MapADT.class: MapADT.java
 	javac MapADT.java
-ShowSearcherApp.class: ShowSearcherApp.java IShowSearcherFrontend.class IShowLoader.class IShow.class IShowSearcherBackend.class 
+ShowSearcherApp.class: ShowSearcherApp.java IShowSearcherFrontend.class IShowLoader.class IShow.class IShowSearcherBackend.class ShowLoader.class ShowSearcherBackend.class ShowSearcherFrontend.class
 	javac ShowSearcherApp.java
 IShowLoader.class: IShowLoader.java IShow.class 
 	javac IShowLoader.java
