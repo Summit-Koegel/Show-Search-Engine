@@ -10,8 +10,8 @@ ShowSearcherFrontend.class: ShowSearcherFrontend.java IShowSearcherFrontend.clas
 ShowSearcherBackend.class: ShowSearcherBackend.java IShowSearcherBackend.class ShowSearcherFrontend.class Show.class
 	javac ShowSearcherBackend.java
 
-Show.class: Show.java IShow.class
-	javac Show.java
+Show.class: ShowPH.java IShow.class
+	javac ShowPH.java
 
 IShowSearcherFrontend.class: IShowSearcherFrontend.java
 	javac IShowSearcherFrontend.java
