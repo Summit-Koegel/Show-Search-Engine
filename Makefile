@@ -65,9 +65,6 @@ ShowSearcherApp.class: ShowSearcherApp.java IShowSearcherFrontend.class IShowLoa
 	javac ShowSearcherApp.java
 IShowLoader.class: IShowLoader.java IShow.class 
 	javac IShowLoader.java
-IShowSearcherFrontend.class: IShowSearcherFrontend.java
-	javac IShowSearcherFrontend.java
-
 
 clean:
 	rm *.class
@@ -80,4 +77,4 @@ Show: Show.java
 
 ShowLoader: ShowLoader.java
 	javac ShowLoader.java
-
+	
