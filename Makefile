@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 runFrontendDeveloperTests: FrontendDeveloperTests.class
 	java FrontendDeveloperTests
 
