@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 runFrontendDeveloperTests: FrontendDeveloperTests.class
 	java FrontendDeveloperTests
@@ -26,7 +27,7 @@ IShow.class: IShow.java
 run: ShowSearcherApp.class
 	java ShowSearcherApp.class
 
-runTests: runAlgorithmEngineerTests runFrontendDeveloperTests runBackendDeveloperTests
+runTests: runAlgorithmEngineerTests runFrontendDeveloperTests runBackendDeveloperTests runDataWranglerTests
 
 runAlgorithmEngineerTests: AlgorithmEngineerTests.class
 	java AlgorithmEngineerTests
@@ -69,4 +70,13 @@ IShowLoader.class: IShowLoader.java IShow.class
 
 clean:
 	rm *.class
+
+runDataWranglerTests: Show ShowLoader DataWranglerTests.java
+	javac DataWranglerTests.java
+
+Show: Show.java
+	javac Show.java
+
+ShowLoader: ShowLoader.java
+	javac ShowLoader.java
 
