@@ -1,3 +1,8 @@
+run: ShowSearcherApp.class
+	java ShowSearcherApp.class
+
+runTests: runAlgorithmEngineerTests
+
 runAlgorithmEngineerTests: AlgorithmEngineerTests.class
 	java AlgorithmEngineerTests
 
