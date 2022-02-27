@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 runFrontendDeveloperTests: FrontendDeveloperTests.class
 	java FrontendDeveloperTests
@@ -79,4 +78,4 @@ Show: Show.java
 
 ShowLoader: ShowLoader.java
 	javac ShowLoader.java
-
+	
