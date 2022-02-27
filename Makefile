@@ -1,4 +1,4 @@
-runTests: AlgorithmEngineerTests.class
+runAlgorithmEngineerTests: AlgorithmEngineerTests.class
 	java AlgorithmEngineerTests
 
 AlgorithmEngineerTests.class: AlgorithmEngineerTests.java HashTableSortedSets.class
