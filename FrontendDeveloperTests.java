@@ -13,7 +13,7 @@ public class FrontendDeveloperTests {
      */
     public static boolean test1(){
         //These 3 lines apply to all the following tester methods
-        ShowSearcherBackend backend = new ShowSearcherBackend(); // Constructs backend for implementation
+        ShowSearcherBackendPH backend = new ShowSearcherBackendPH(); // Constructs backend for implementation
         // Constructs frontend with "q" as default for quitting the while loop
         ShowSearcherFrontend frontend = new ShowSearcherFrontend("q\n", backend);
         //Constructs UI tester with no input
@@ -50,7 +50,7 @@ public class FrontendDeveloperTests {
      * @return T/F
      */
     public static boolean test2(){
-        ShowSearcherBackend backend = new ShowSearcherBackend();
+        ShowSearcherBackendPH backend = new ShowSearcherBackendPH();
         ShowSearcherFrontend frontend = new ShowSearcherFrontend("q\n", backend);
         TextUITester testerUI = new TextUITester("");
 
@@ -83,15 +83,15 @@ public class FrontendDeveloperTests {
      * @return T/F
      */
     public static boolean test3(){
-        ShowSearcherBackend backend = new ShowSearcherBackend();
+        ShowSearcherBackendPH backend = new ShowSearcherBackendPH();
         ShowSearcherFrontend frontend = new ShowSearcherFrontend("q\n", backend);
         TextUITester testerUI = new TextUITester("");
 
         List<IShow> list = List.of(
-            new Show("Breaking Bad", 2008, 100, "Netflix"), 
-            new Show("Hang Ups", 2018, 59, "Hulu"),
-            new Show("Titanic", 2012, 55, "Prime Video"),
-            new Show("Dino Ranch", 2021, 42, "Disney+"));
+            new ShowPH2("Breaking Bad", 2008, 100, "Netflix"), 
+            new ShowPH2("Hang Ups", 2018, 59, "Hulu"),
+            new ShowPH2("Titanic", 2012, 55, "Prime Video"),
+            new ShowPH2("Dino Ranch", 2021, 42, "Disney+"));
 
         frontend.displayShows(list); // Run method
         String OP = testerUI.checkOutput(); // Store output
@@ -121,7 +121,7 @@ public class FrontendDeveloperTests {
      * @return T/F
      */
     public static boolean test4(){
-        ShowSearcherBackend backend = new ShowSearcherBackend();
+        ShowSearcherBackendPH backend = new ShowSearcherBackendPH();
         ShowSearcherFrontend frontend = new ShowSearcherFrontend("q\n", backend);
         TextUITester testerUI = new TextUITester("");
 
@@ -151,7 +151,7 @@ public class FrontendDeveloperTests {
      * @return T/F
      */
     public static boolean test5(){
-        ShowSearcherBackend backend = new ShowSearcherBackend();
+        ShowSearcherBackendPH backend = new ShowSearcherBackendPH();
         ShowSearcherFrontend frontend = new ShowSearcherFrontend("2018\n", backend); //Different input: year
         TextUITester testerUI = new TextUITester("");
 
