@@ -28,11 +28,11 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 		
 	}
 	public ShowSearcherBackend() {//create show searcher
-		showsByTitleWord = new HashTableSortedSets<String,IShow>(7000);
-		showsByYear = new HashTableSortedSets<Integer,IShow>(7000);
+		showsByTitleWord = new HashTableSortedSets<String,IShow>(6000);
+		showsByYear = new HashTableSortedSets<Integer,IShow>(6000);
 		
 		prov = new String[] {"netflix", "hulu", "prime video","disney+"};
-		provTog = new boolean[4];
+		provTog = new boolean[] {true, true, true, true};
 	}
 
 	@Override
