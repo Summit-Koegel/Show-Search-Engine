@@ -58,13 +58,11 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend{
         while(count == 0){
             if(choice.equals("1") || choice.toLowerCase().equals("t")){
                 System.out.print("Choose a word that you would like to search for: ");
-                scan.nextLine();
                 titleSearch();
             }
     
             if(choice.equals("2") || choice.toLowerCase().equals("y")){
                 System.out.print("Choose a year that you would like to search for: ");
-                scan.nextLine();
                 yearSearch();
             }
     
