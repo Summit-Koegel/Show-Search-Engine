@@ -23,7 +23,7 @@ IShow.class: IShow.java
 	javac IShow.java
 
 run: ShowSearcherApp.class
-	java ShowSearcherApp.class
+	java ShowSearcherApp
 
 runTests: runAlgorithmEngineerTests runFrontendDeveloperTests runBackendDeveloperTests runDataWranglerTests
 
