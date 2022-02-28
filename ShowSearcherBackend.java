@@ -2,8 +2,8 @@ import java.util.List;
 
 public class ShowSearcherBackend implements IShowSearcherBackend{
 	
-	private IHashTableSortedSets<String,IShow> showsByTitleWord;
-	private IHashTableSortedSets<Integer,IShow> showsByYear;
+	private HashTableSortedSets<String,IShow> showsByTitleWord;
+	private HashTableSortedSets<Integer,IShow> showsByYear;
 	private int length = 0;
 	private boolean[] provTog;//provider toggle
 	private String[] prov;
@@ -28,9 +28,10 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 		
 	}
 	public ShowSearcherBackend() {//create show searcher
-		showsByTitleWord = new HashTableSortedSetsPlacehold<String>();
-		showsByYear = new HashTableSortedSetsPlacehold<Integer>();
-		prov = new String[] {"Netflix", "Hulu", "Prime Video","Disney Plus"};
+		showsByTitleWord = new HashTableSortedSets<String,IShow>(7000);
+		showsByYear = new HashTableSortedSets<Integer,IShow>(7000);
+		
+		prov = new String[] {"netflix", "hulu", "prime video","disney+"};
 		provTog = new boolean[4];
 	}
 
