@@ -16,7 +16,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 			int space = full.indexOf(" ");
 			if(space == -1) {
 				showsByTitleWord.add(full, show);
-				full = "";
+				break;
 			}else {
 				showsByTitleWord.add(full.substring(0,space), show);
 				if(full.length()>space+1)
@@ -28,8 +28,8 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 		
 	}
 	public ShowSearcherBackend() {//create show searcher
-		showsByTitleWord = new HashTableSortedSets<String,IShow>(6000);
-		showsByYear = new HashTableSortedSets<Integer,IShow>(6000);
+		showsByTitleWord = new HashTableSortedSets<String,IShow>(80000);
+		showsByYear = new HashTableSortedSets<Integer,IShow>(50000);
 		
 		prov = new String[] {"netflix", "hulu", "prime video","disney+"};
 		provTog = new boolean[] {true, true, true, true};
