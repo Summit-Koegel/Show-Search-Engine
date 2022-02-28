@@ -61,16 +61,16 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend{
                 titleSearch();
             }
     
-            if(choice.equals("2") || choice.toLowerCase().equals("y")){
+	    else if(choice.equals("2") || choice.toLowerCase().equals("y")){
                 System.out.print("Choose a year that you would like to search for: ");
                 yearSearch();
             }
     
-            if(choice.equals("3") || choice.toLowerCase().equals("f")){
+	    else if(choice.equals("3") || choice.toLowerCase().equals("f")){
                 toggleFilter();
             }
     
-            if(choice.equals("4") || choice.toLowerCase().equals("q")){
+	    else if(choice.equals("4") || choice.toLowerCase().equals("q")){
                 count++;
                 System.out.println();
             }
