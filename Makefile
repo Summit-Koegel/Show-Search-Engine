@@ -8,11 +8,11 @@ FrontendDeveloperTests.class: FrontendDeveloperTests.java ShowSearcherFrontend.c
 ShowSearcherFrontend.class: ShowSearcherFrontend.java IShowSearcherFrontend.class ShowSearcherBackend.class Show.class
 	javac ShowSearcherFrontend.java
 
-ShowSearcherBackend.class: ShowSearcherBackend.java IShowSearcherBackend.class ShowSearcherFrontend.class Show.class
-	javac ShowSearcherBackend.java
+ShowSearcherBackend.class: ShowSearcherBackendPH.java IShowSearcherBackend.class ShowSearcherFrontend.class Show.class
+	javac ShowSearcherBackendPH.java
 
-Show.class: Show.java IShow.class
-	javac Show.java
+Show.class: ShowPH2.java IShow.class
+	javac ShowPH2.java
 
 IShowSearcherFrontend.class: IShowSearcherFrontend.java
 	javac IShowSearcherFrontend.java
