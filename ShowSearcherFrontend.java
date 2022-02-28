@@ -61,16 +61,16 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend{
                 titleSearch();
             }
     
-            if(choice.equals("2") || choice.toLowerCase().equals("y")){
+	    else if(choice.equals("2") || choice.toLowerCase().equals("y")){
                 System.out.print("Choose a year that you would like to search for: ");
                 yearSearch();
             }
     
-            if(choice.equals("3") || choice.toLowerCase().equals("f")){
+	    else if(choice.equals("3") || choice.toLowerCase().equals("f")){
                 toggleFilter();
             }
     
-            if(choice.equals("4") || choice.toLowerCase().equals("q")){
+	    else if(choice.equals("4") || choice.toLowerCase().equals("q")){
                 count++;
                 System.out.println();
             }
@@ -106,7 +106,6 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend{
      */
     public void toggleFilter(){
 
-        String choice = scan.nextLine();
         int count = 0;
 
         String space1 = null;
@@ -130,6 +129,8 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend{
         System.out.println("5) [Q]uit toggling provider filters");
 
         System.out.println("Choose the provider that you'd like to toggle the filter for: ");
+
+	String choice = scan.nextLine();
 
         //Sets provider on or off depending on user input
         if(choice == "1" || choice.toLowerCase() == "n"){
