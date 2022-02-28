@@ -10,15 +10,15 @@ ShowSearcherFrontend.class: ShowSearcherFrontend.java IShowSearcherFrontend.clas
 ShowSearcherBackend.class: ShowSearcherBackend.java IShowSearcherBackend.class ShowSearcherFrontend.class Show.class
 	javac ShowSearcherBackend.java
 
-Show.class: ShowPH.java IShow.class
-	javac ShowPH.java
+Show.class: Show.java IShow.class
+	javac Show.java
 
 IShowSearcherFrontend.class: IShowSearcherFrontend.java
 	javac IShowSearcherFrontend.java
 
 IShowSearcherBackend.class: IShowSearcherBackend.java
 	javac IShowSearcherBackend.java
-
+	
 IShow.class: IShow.java
 	javac IShow.java
 
@@ -27,6 +27,8 @@ run: ShowSearcherApp.class
 
 runTests: runAlgorithmEngineerTests runFrontendDeveloperTests runBackendDeveloperTests runDataWranglerTests
 
+runDataWranglerTests: DataWranglerTests.class
+	java DataWranglerTests
 runAlgorithmEngineerTests: AlgorithmEngineerTests.class
 	java AlgorithmEngineerTests
 
@@ -61,7 +63,7 @@ IShowSearcherBackend.class: IShowSearcherBackend.java
 
 MapADT.class: MapADT.java
 	javac MapADT.java
-ShowSearcherApp.class: ShowSearcherApp.java IShowSearcherFrontend.class IShowLoader.class IShow.class IShowSearcherBackend.class 
+ShowSearcherApp.class: ShowSearcherApp.java IShowSearcherFrontend.class IShowLoader.class IShow.class IShowSearcherBackend.class ShowLoader.class ShowSearcherBackend.class ShowSearcherFrontend.class
 	javac ShowSearcherApp.java
 IShowLoader.class: IShowLoader.java IShow.class 
 	javac IShowLoader.java
@@ -69,12 +71,9 @@ IShowLoader.class: IShowLoader.java IShow.class
 clean:
 	rm *.class
 
-runDataWranglerTests: Show ShowLoader DataWranglerTests.java
+DataWranglerTests.class: Show.class ShowLoader.class DataWranglerTests.java
 	javac DataWranglerTests.java
 
-Show: Show.java
-	javac Show.java
-
-ShowLoader: ShowLoader.java
+ShowLoader.class: ShowLoader.java
 	javac ShowLoader.java
 	
