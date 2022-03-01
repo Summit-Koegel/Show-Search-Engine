@@ -25,7 +25,6 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 					full = full.substring(space+1);//go again with next word
 			}
 		}
-		showsByTitleWord.add(show.getTitle(), show);
 		length++;
 		
 	}
