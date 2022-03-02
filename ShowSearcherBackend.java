@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ShowSearcherBackend implements IShowSearcherBackend{
 	
@@ -116,11 +117,14 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	 */
 	@Override
 	public List<IShow> searchByTitleWord(String word) {
-		
-		List<IShow> withWord= showsByTitleWord.get(word.toLowerCase());
-		filterOut(withWord);//good service
-		sortByRating(withWord);//sort
-		return withWord;
+		try {
+			List<IShow> withWord= showsByTitleWord.get(word.toLowerCase());
+			filterOut(withWord);//good service
+			sortByRating(withWord);//sort
+			return withWord;
+		} catch(NoSuchElementException e){
+			return new ArrayList<IShow>();
+		}
 		
 	}
 	
@@ -162,10 +166,14 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	 */
 	@Override
 	public List<IShow> searchByYear(int year) {
-		List<IShow> withYear= showsByYear.get(year);
-		filterOut(withYear);//good service
-		sortByRating(withYear);//sort
-		return withYear;
+		try {
+			List<IShow> withYear= showsByYear.get(year);
+			filterOut(withYear);//good service
+			sortByRating(withYear);//sort
+			return withYear;
+		} catch(NoSuchElementException e) {
+			return new ArrayList<IShow>();
+		}
 	}
 
 }
