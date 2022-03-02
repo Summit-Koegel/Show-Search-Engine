@@ -60,6 +60,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	@Override
 	public void setProviderFilter(String provider, boolean filter) {
 		
+		provider = provider.toLowerCase();
 		int ind = 0;
 		boolean escape = true;
 		for(ind = 0; ind< prov.length&&escape; ind++) {
@@ -80,6 +81,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	@Override
 	public boolean getProviderFilter(String provider) {
 		int ind = 0;
+		provider = provider.toLowerCase();
 		boolean escape = true;
 		for(ind = 0; ind< prov.length&&escape; ind++) {
 			if(prov[ind].equals(provider)) {
