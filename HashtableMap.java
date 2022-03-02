@@ -7,6 +7,7 @@
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
+import java.util.ArrayList;
 
 public class HashtableMap<KeyType, ValueType> implements MapADT<KeyType, ValueType> {
 
@@ -15,7 +16,7 @@ public class HashtableMap<KeyType, ValueType> implements MapADT<KeyType, ValueTy
 	// number of elements in the table
 	protected int size;
 	// array to store all key, value pairs
-	protected LinkedList[] arr;
+	protected ArrayList[] arr;
 
 	public HashtableMap(int capacity) {
 		// sets the capacity of the array and initializes each linked list in it
@@ -23,18 +24,18 @@ public class HashtableMap<KeyType, ValueType> implements MapADT<KeyType, ValueTy
 			this.capacity = capacity;
 		else
 			this.capacity = 20;
-		arr = new LinkedList[this.capacity];
+		arr = new ArrayList[this.capacity];
 		for (int i = 0; i < this.capacity; i++) {
-			arr[i] = new LinkedList();
+			arr[i] = new ArrayList();
 		}
 	}
 
 	public HashtableMap() {
 		// sets the capacity of the array and initializes each linked list in it
 		this.capacity = 20;
-		arr = new LinkedList[this.capacity];
+		arr = new ArrayList[this.capacity];
 		for (int i = 0; i < this.capacity; i++) {
-			arr[i] = new LinkedList();
+			arr[i] = new ArrayList();
 		}
 	}
 
@@ -115,7 +116,7 @@ public class HashtableMap<KeyType, ValueType> implements MapADT<KeyType, ValueTy
 	public void clear() {
 		// sets each linked list in the array to a new array
 		for (int i = 0; i < this.capacity; i++) {
-			this.arr[i] = new LinkedList();
+			this.arr[i] = new ArrayList();
 		}
 		// sets size to 0
 		this.size = 0;
@@ -124,13 +125,13 @@ public class HashtableMap<KeyType, ValueType> implements MapADT<KeyType, ValueTy
 
 	private void resize() {
 		// stores old array and old capacity
-		LinkedList[] oldArr = this.arr;
+		ArrayList[] oldArr = this.arr;
 		int oldCap = this.capacity;
 		// sets new capacity and makes + initializes the new array
 		this.capacity *= 2;
-		LinkedList[] newArr = new LinkedList[this.capacity];
+		ArrayList[] newArr = new ArrayList[this.capacity];
 		for (int i = 0; i < this.capacity; i++) {
-			newArr[i] = new LinkedList();
+			newArr[i] = new ArrayList();
 		}
 		// sets the table to the new array and new size
 		this.size = 0;
