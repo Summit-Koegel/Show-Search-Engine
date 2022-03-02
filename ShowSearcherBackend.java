@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowSearcherBackend implements IShowSearcherBackend{
@@ -9,18 +10,29 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	private String[] prov;
 	@Override
 	public void addShow(IShow show) {
-		
+		ArrayList<String> duplicates = new ArrayList<String>();
 		showsByYear.add(show.getYear(), show);
 		String full = show.getTitle();
 		while(full.length()>0) {
 			int space = full.indexOf(" ");
 			if(space == -1) {
-				showsByTitleWord.add(full.toLowerCase(), show);
+				if(!duplicates.contains(full)) {
+					showsByTitleWord.add(full.toLowerCase(), show);
+				}
 				break;
 			}else {
-				showsByTitleWord.add(full.substring(0,space).toLowerCase(), show);
-				if(full.length()>space+1)
+				String toAdd = full.substring(0,space).toLowerCase();
+				if(!duplicates.contains(toAdd)) {
+					showsByTitleWord.add((toAdd), show);
+				}
+				if(full.length()>space+1) {
 					full = full.substring(space+1);//go again with next word
+					if((" "+full).indexOf(" "+toAdd)!=-1) {
+						duplicates.add(toAdd);
+					}
+				}else {
+					break;
+				}
 			}
 		}
 		showsByTitleWord.add(show.getTitle(), show);
@@ -86,6 +98,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	public void toggleProviderFilter(String provider) {
 		int ind = 0;
 		boolean escape = true;
+		provider =provider.toLowerCase();
 		for(ind = 0; ind< prov.length&&escape; ind++) {
 			if(prov[ind].equals(provider)) {
 				escape = false;

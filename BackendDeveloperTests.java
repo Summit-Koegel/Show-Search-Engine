@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -129,6 +131,81 @@ public class BackendDeveloperTests {
 		return true; 
 		
 	}
+	
+	public static boolean testDataWr1() {//does rating of 100 show as 100
+		String filepa = ("tv_shows.csv");
+		//ArrayList<IShow>
+		return true;
+		
+	}
+	public static boolean testDataWr2() {
+		return true;
+	}
+	
+	public static boolean testBE1() {//is this case sensitive
+		try {
+	
+			ShowSearcherBackend back = new ShowSearcherBackend();
+			back.addShow(new Show("sOmeThi ###Oo",1984,36,"disney+"));
+			back.addShow(new Show("SOMethi other",2001,99,"disney+"));
+			List<IShow> shows = back.searchByTitleWord("SOMETHI");
+			if(shows.size()!=2)return false;
+			if(!shows.get(0).getTitle().equals("SOMethi other"))return false;
+			if(!shows.get(1).getTitle().equals("sOmeThi ###Oo"))return false;
+			shows = back.searchByTitleWord("somethi");
+			if(shows.size()!=2)return false;
+			if(!shows.get(0).getTitle().equals("SOMethi other"))return false;
+			if(!shows.get(1).getTitle().equals("sOmeThi ###Oo"))return false;
+			shows = back.searchByTitleWord("SoMetHI");
+			if(shows.size()!=2)return false;
+			if(!shows.get(0).getTitle().equals("SOMethi other"))return false;
+			if(!shows.get(1).getTitle().equals("sOmeThi ###Oo"))return false;
+			shows = back.searchByTitleWord("OTHER");
+			if(shows.size()!=1)return false;
+			if(!shows.get(0).getTitle().equals("SOMethi other"))return false;
+			shows = back.searchByTitleWord("###oO");
+			if(shows.size()!=1)return false;
+			if(!shows.get(0).getTitle().equals("sOmeThi ###Oo"))return false;
+			
+			
+			
+		} catch(Exception e) {//unexpected
+			return false;
+		}
+		
+		return true;
+		
+	}
+	public static boolean testBE2() {//tests searching for all words within
+		try {
+			String toBuild ="";
+			ShowSearcherBackend back = new ShowSearcherBackend();
+			for(int i =0; i<5;i++) {
+				toBuild+="word"+i+" ";
+			}
+			toBuild = toBuild.strip();
+			
+			back.addShow(new Show(toBuild,1984,20,"netflix"));
+			
+			
+			for(int i =0; i<5; i++) {
+				List<IShow> searched = back.searchByTitleWord("word"+i);
+				if(!searched.get(0).getTitle().equals(toBuild))return false;
+			}
+			
+			toBuild = "repeat repeat repeat repeat";
+			back.addShow(new Show(toBuild,1986,25,"netflix"));
+			List<IShow> searched = back.searchByTitleWord("repeat");
+			System.out.print(searched.size());
+			if(searched.size()!= 1) {
+				return false;
+			}
+		}catch(Exception e) {//unexpected
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	public static boolean runAllTests() {
 		boolean success = true;
 		//unideal to run each test twice but i am too tired, and doesn't matter enough
@@ -144,8 +221,28 @@ public class BackendDeveloperTests {
 		success = test5()&&success;
 		return success;
 	}
+	public static boolean runNewTests() {
+		
+		boolean successwr = true;
+		
+		System.out.println("Running data wrangler tests (written by backend)");
+		 
+		successwr = testDataWr1();
+		boolean temp =  testDataWr2();
+		System.out.println("Testing for 100 rotten T: "+successwr);
+		System.out.println("Testing first 10 elements: "+temp);
+		System.out.println("All additional wrangler tests have passed: "+(successwr&&temp));
+		successwr = testBE1();
+		temp = testBE2();
+		System.out.println("Searches for uppercase +lowercase: "+successwr);
+		System.out.println("Searches for multiple word words+ duplicates:"+temp);
+		
+		return successwr;
+	}
 	public static void main(String[] args) {
-		System.out.println("All test passed? "+runAllTests());
+		//only run NewTests(run All tests only works with placeholders)
+		runNewTests();
+		
 	}
 	
 	
