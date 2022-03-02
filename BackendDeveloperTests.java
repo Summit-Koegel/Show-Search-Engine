@@ -132,13 +132,12 @@ public class BackendDeveloperTests {
 		
 	}
 	
-	public static boolean testDataWr1() {//does rating of 100 show as 100
-		String filepa = ("tv_shows.csv");
-		//ArrayList<IShow>
+	public static boolean testFE1() {
+		
 		return true;
 		
 	}
-	public static boolean testDataWr2() {
+	public static boolean testFE2() {
 		return true;
 	}
 	
@@ -193,13 +192,16 @@ public class BackendDeveloperTests {
 				if(!searched.get(0).getTitle().equals(toBuild))return false;
 			}
 			
-			toBuild = "repeat repeat repeat repeat";
+			toBuild = "repeat this repeat";// repeat repeat";
 			back.addShow(new Show(toBuild,1986,25,"netflix"));
 			List<IShow> searched = back.searchByTitleWord("repeat");
-			System.out.print(searched.size());
 			if(searched.size()!= 1) {
 				return false;
 			}
+			back.addShow(new Show("Go Dog Go",2021,44,"netflix"));
+			searched = back.searchByTitleWord("go");
+			if(searched.size()!= 1) return false;
+			
 		}catch(Exception e) {//unexpected
 			e.printStackTrace();
 			return false;
@@ -225,13 +227,13 @@ public class BackendDeveloperTests {
 		
 		boolean successwr = true;
 		
-		System.out.println("Running data wrangler tests (written by backend)");
+		System.out.println("Running front end tests (written by backend)");
 		 
-		successwr = testDataWr1();
-		boolean temp =  testDataWr2();
+		successwr = testFE1();
+		boolean temp =  testFE2();
 		System.out.println("Testing for 100 rotten T: "+successwr);
 		System.out.println("Testing first 10 elements: "+temp);
-		System.out.println("All additional wrangler tests have passed: "+(successwr&&temp));
+		System.out.println("All additional Front end tests have passed: "+(successwr&&temp));
 		successwr = testBE1();
 		temp = testBE2();
 		System.out.println("Searches for uppercase +lowercase: "+successwr);
