@@ -1,6 +1,4 @@
 import java.util.List;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 public class ShowSearcherBackend implements IShowSearcherBackend{
 	
@@ -17,20 +15,21 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 		while(full.length()>0) {
 			int space = full.indexOf(" ");
 			if(space == -1) {
-				showsByTitleWord.add(full, show);
+				showsByTitleWord.add(full.toLowerCase(), show);
 				break;
 			}else {
-				showsByTitleWord.add(full.substring(0,space), show);
+				showsByTitleWord.add(full.substring(0,space).toLowerCase(), show);
 				if(full.length()>space+1)
 					full = full.substring(space+1);//go again with next word
 			}
 		}
+		showsByTitleWord.add(show.getTitle(), show);
 		length++;
 		
 	}
 	public ShowSearcherBackend() {//create show searcher
-		showsByTitleWord = new HashTableSortedSets<String,IShow>(80000);
-		showsByYear = new HashTableSortedSets<Integer,IShow>(50000);
+		showsByTitleWord = new HashTableSortedSets<String,IShow>(60000);
+		showsByYear = new HashTableSortedSets<Integer,IShow>(6000);
 		
 		prov = new String[] {"netflix", "hulu", "prime video","disney+"};
 		provTog = new boolean[] {true, true, true, true};
@@ -105,16 +104,10 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	@Override
 	public List<IShow> searchByTitleWord(String word) {
 		
-		try{
-			List<IShow> withWord= showsByTitleWord.get(word);
-			filterOut(withWord);//good service
-			sortByRating(withWord);//sort
-			return withWord;
-		}catch(NoSuchElementException e){
-			
-			return new LinkedList<IShow>();
-
-		}
+		List<IShow> withWord= showsByTitleWord.get(word.toLowerCase());
+		filterOut(withWord);//good service
+		sortByRating(withWord);//sort
+		return withWord;
 		
 	}
 	
@@ -156,14 +149,10 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	 */
 	@Override
 	public List<IShow> searchByYear(int year) {
-		try{
-			List<IShow> withYear= showsByYear.get(year);
-			filterOut(withYear);//good service
-			sortByRating(withYear);//sort
-			return withYear;
-		}catch(NoSuchElementException e){
-			return new LinkedList<IShow>();
-		}
+		List<IShow> withYear= showsByYear.get(year);
+		filterOut(withYear);//good service
+		sortByRating(withYear);//sort
+		return withYear;
 	}
 
 }
