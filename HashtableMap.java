@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class HashtableMap<KeyType, ValueType> implements MapADT<KeyType, ValueType> {
 
 	// capacity of table
-	private int capacity;
+	protected int capacity;
 	// number of elements in the table
 	protected int size;
 	// array to store all key, value pairs
