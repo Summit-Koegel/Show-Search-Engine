@@ -14,6 +14,8 @@ public class DataWranglerTests {
     System.out.println("Show availableOn: " + test3());
     System.out.println("Showloader error handling: " + test4());
     System.out.println("Showloader shows: " + test5());
+    System.out.println("ShowLoader into Backend: " + test6());
+    System.out.println("Backend searches with showLoader: " + test7());
   }
 
   /**
@@ -102,6 +104,59 @@ public class DataWranglerTests {
           return false;
      }
     } catch (Exception e){
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Tests edge cases for rating in showLoader and checks if backend adds it
+   * @return True if edge cases handled, false otherwise
+   */
+  public static boolean test6() {
+    ShowLoader a = new ShowLoader();
+    try {
+      List<IShow> shows = a.loadShows("./tv_shows.csv");
+      //Breaking bad
+      if (shows.get(0).getRating() != 100)
+        return false;
+      if (shows.get(226).getRating() != 73)
+        return false;
+      ShowSearcherBackend test = new ShowSearcherBackend();
+      test.addShow(shows.get(0));
+      if (test.getNumberOfShows() != 1){
+	      System.out.println("Incorrect number of shows in backend");
+	      return false;
+      }
+      if (!test.searchByTitleWord("Breaking").get(0).getTitle().equals("Breaking Bad")){
+	      System.out.println("Incorrect return by searchByTitle");
+	      return false;
+      }
+    } catch (Exception e) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Tests if backend correctly implements searchByYear and searchByTitleWord
+   * @return True if return as expected, false otherwise
+   */
+  public static boolean test7() {
+    ShowLoader a = new ShowLoader();
+    try {
+      List<IShow> shows = a.loadShows("./tv_shows.csv");
+      ShowSearcherBackend test = new ShowSearcherBackend();
+      test.addShow(shows.get(0));
+      if (!test.searchByTitleWord("Breaking").get(0).getTitle().equals("Breaking Bad")){
+              System.out.println("Incorrect return by searchByTitle");
+              return false;
+      }
+      if (!test.searchByYear(2008).get(0).getTitle().equals("Breaking Bad")){
+	      System.out.println("Incorrect return by searchByYear");
+	      return false;
+      }
+    } catch (Exception e) {
       return false;
     }
     return true;
