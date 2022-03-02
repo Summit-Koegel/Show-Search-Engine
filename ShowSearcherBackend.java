@@ -13,7 +13,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	public void addShow(IShow show) {
 		ArrayList<String> duplicates = new ArrayList<String>();
 		showsByYear.add(show.getYear(), show);
-		String full = show.getTitle();
+		String full = show.getTitle().toLowerCase();
 		while(full.length()>0) {
 			int space = full.indexOf(" ");
 			if(space == -1) {
