@@ -90,9 +90,7 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend{
                 System.out.println("That is not a valid input.");
 		System.out.println("!" + choice1 + "!");	
             }
-        }
-        
-        
+        }      
         
         
     }
@@ -138,28 +136,40 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend{
    	//Sets provider on or off depending on user input
         while(!(choice.equals("5")) && !(choice.toLowerCase().equals("q"))){
             if(choice.equals("1") || choice.toLowerCase().equals("n")){
-                space1 = '_';
+                if(space1 == '_')
+			space1 = 'x';
+		else
+			space1 = '_';
                 backend.setProviderFilter("Netflix", false);
                 toggleHelper();
 		choice = scan.nextLine();
             }
     
             else if(choice.equals("2") || choice.toLowerCase().equals("h")){
-                space2 = '_';
+                if(space2 == '_')
+                        space2 = 'x';
+                else
+                        space2 = '_';
                 backend.setProviderFilter("Hulu", false);
                 toggleHelper();
 		choice = scan.nextLine();
             }
     
             else if(choice.equals("3") || choice.toLowerCase().equals("p")){
-                space3 = '_';
+                if(space3 == '_')
+                        space3 = 'x';
+                else
+                        space3 = '_';
                 backend.setProviderFilter("Prime Video", false);
                 toggleHelper();
 		choice = scan.nextLine();
             }
     
             else if(choice.equals("4") || choice.toLowerCase().equals("d")){
-                space4 = '_';
+                if(space4 == '_')
+                        space4 = 'x';
+                else
+                        space4 = '_';
                 backend.setProviderFilter("Disney+", false);
                 toggleHelper();
 		choice = scan.nextLine();
