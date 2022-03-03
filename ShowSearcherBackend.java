@@ -1,7 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-
+/**
+ * Does backend activities for ShowSearcher
+ * primarily stores and looks for years and title words
+ * 
+ * @author Charlie Jungwirth
+ *
+ */
 public class ShowSearcherBackend implements IShowSearcherBackend{
 	
 	private HashTableSortedSets<String,IShow> showsByTitleWord;
