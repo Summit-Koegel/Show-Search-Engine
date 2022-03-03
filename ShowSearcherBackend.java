@@ -1,5 +1,13 @@
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.NoSuchElementException;
+/**
+ * Does backend activities for ShowSearcher
+ * primarily stores and looks for years and title words
+ * 
+ * @author Charlie Jungwirth
+ *
+ */
 public class ShowSearcherBackend implements IShowSearcherBackend{
 	
 	private HashTableSortedSets<String,IShow> showsByTitleWord;
@@ -9,18 +17,29 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	private String[] prov;
 	@Override
 	public void addShow(IShow show) {
-		
+		ArrayList<String> duplicates = new ArrayList<String>();
 		showsByYear.add(show.getYear(), show);
-		String full = show.getTitle();
+		String full = show.getTitle().toLowerCase();
 		while(full.length()>0) {
 			int space = full.indexOf(" ");
 			if(space == -1) {
-				showsByTitleWord.add(full.toLowerCase(), show);
+				if(!duplicates.contains(full)) {
+					showsByTitleWord.add(full.toLowerCase(), show);
+				}
 				break;
 			}else {
-				showsByTitleWord.add(full.substring(0,space).toLowerCase(), show);
-				if(full.length()>space+1)
+				String toAdd = full.substring(0,space).toLowerCase();
+				if(!duplicates.contains(toAdd)) {
+					showsByTitleWord.add((toAdd), show);
+				}
+				if(full.length()>space+1) {
 					full = full.substring(space+1);//go again with next word
+					if((" "+full).indexOf(" "+toAdd)!=-1) {
+						duplicates.add(toAdd);
+					}
+				}else {
+					break;
+				}
 			}
 		}
 		showsByTitleWord.add(show.getTitle(), show);
@@ -47,6 +66,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	@Override
 	public void setProviderFilter(String provider, boolean filter) {
 		
+		provider = provider.toLowerCase();
 		int ind = 0;
 		boolean escape = true;
 		for(ind = 0; ind< prov.length&&escape; ind++) {
@@ -67,6 +87,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	@Override
 	public boolean getProviderFilter(String provider) {
 		int ind = 0;
+		provider = provider.toLowerCase();
 		boolean escape = true;
 		for(ind = 0; ind< prov.length&&escape; ind++) {
 			if(prov[ind].equals(provider)) {
@@ -86,6 +107,7 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	public void toggleProviderFilter(String provider) {
 		int ind = 0;
 		boolean escape = true;
+		provider =provider.toLowerCase();
 		for(ind = 0; ind< prov.length&&escape; ind++) {
 			if(prov[ind].equals(provider)) {
 				escape = false;
@@ -103,11 +125,14 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	 */
 	@Override
 	public List<IShow> searchByTitleWord(String word) {
-		
-		List<IShow> withWord= showsByTitleWord.get(word.toLowerCase());
-		filterOut(withWord);//good service
-		sortByRating(withWord);//sort
-		return withWord;
+		try {
+			List<IShow> withWord= showsByTitleWord.get(word.toLowerCase());
+			filterOut(withWord);//good service
+			sortByRating(withWord);//sort
+			return withWord;
+		} catch(NoSuchElementException e){
+			return new ArrayList<IShow>();
+		}
 		
 	}
 	
@@ -149,10 +174,14 @@ public class ShowSearcherBackend implements IShowSearcherBackend{
 	 */
 	@Override
 	public List<IShow> searchByYear(int year) {
-		List<IShow> withYear= showsByYear.get(year);
-		filterOut(withYear);//good service
-		sortByRating(withYear);//sort
-		return withYear;
+		try {
+			List<IShow> withYear= showsByYear.get(year);
+			filterOut(withYear);//good service
+			sortByRating(withYear);//sort
+			return withYear;
+		} catch(NoSuchElementException e) {
+			return new ArrayList<IShow>();
+		}
 	}
 
 }

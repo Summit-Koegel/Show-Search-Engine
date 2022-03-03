@@ -42,7 +42,12 @@ public class ShowLoader implements IShowLoader {
           providers += "prime ";
         if(showData[10].equals("1"))
           providers += "disney+";
-        showData[6] = showData[6].substring(0, 2);
+	if (showData[6].equals("100/100"))
+          showData[6] = showData[6].substring(0, 3);
+        else if (showData[6].charAt(1) == '/')
+          showData[6] = showData[6].substring(0, 1);
+        else
+          showData[6] = showData[6].substring(0, 2); 
         Show temp = new Show(showData[2], Integer.parseInt(showData[3]),
             Integer.parseInt(showData[6]), providers);
         shows.add(temp);
