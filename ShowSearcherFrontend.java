@@ -87,8 +87,7 @@ public class ShowSearcherFrontend implements IShowSearcherFrontend{
             }
     
             else{
-                System.out.println("That is not a valid input.");
-		System.out.println("!" + choice1 + "!");	
+                System.out.println("That is not a valid input.");	
             }
         }      
         

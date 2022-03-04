@@ -1,7 +1,8 @@
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class FrontendDeveloperTests {
-    
+
     /**
      * Tests runCommandLoop to see if program follows the correct procedures and 
      * returns the correct output
@@ -36,7 +37,7 @@ public class FrontendDeveloperTests {
 
         return true;
 
-        
+
     }
 
     
@@ -88,7 +89,7 @@ public class FrontendDeveloperTests {
         TextUITester testerUI = new TextUITester("");
 
         List<IShow> list = List.of(
-            new ShowPH2("Breaking Bad", 2008, 100, "Netflix"), 
+            new ShowPH2("Breaking Bad", 2008, 100, "Netflix"),
             new ShowPH2("Hang Ups", 2018, 59, "Hulu"),
             new ShowPH2("Titanic", 2012, 55, "Prime Video"),
             new ShowPH2("Dino Ranch", 2021, 42, "Disney+"));
@@ -97,7 +98,7 @@ public class FrontendDeveloperTests {
         String OP = testerUI.checkOutput(); // Store output
 
         //Check output with that that should have printed
-        if(!OP.startsWith("Found") 
+        if(!OP.startsWith("Found")
             || !OP.contains("100/100 (2008) on: Netflix")
             || !OP.contains("2. Hang Ups")
             || !OP.contains("59/100 (2018) on: Hulu")
@@ -129,7 +130,7 @@ public class FrontendDeveloperTests {
         String OP = testerUI.checkOutput(); // Store output
 
         //Check output with that that should have printed
-        if(!OP.startsWith("Found") 
+        if(!OP.startsWith("Found")
             || !OP.contains("100/100 (2008) on: Netflix")
             || !OP.contains("2. Hang Ups")
             || !OP.contains("59/100 (2018) on: Hulu")
@@ -137,7 +138,7 @@ public class FrontendDeveloperTests {
             || !OP.contains("42/100 (2021) on: Disney+")){
                 return false;
             }
-            
+
         return true;
     }
 
@@ -159,7 +160,7 @@ public class FrontendDeveloperTests {
         String OP = testerUI.checkOutput();// Store output
 
         //Check output with that that should have printed
-        if(!OP.startsWith("Found") 
+        if(!OP.startsWith("Found")
             || !OP.contains("100/100 (2008) on: Netflix")
             || !OP.contains("2. Hang Ups")
             || !OP.contains("59/100 (2018) on: Hulu")
@@ -167,16 +168,147 @@ public class FrontendDeveloperTests {
             || !OP.contains("42/100 (2021) on: Disney+")){
                 return false;
             }
-            
+
+        return true;
+    }
+
+    /**
+     * Tests toggleFilter if reverts back to false if tested again
+     * to see if program follows the correct procedures and 
+     * returns the correct output
+     * If certain phrases from the GUI are not printed the tester will check
+     * and return false
+     * Return true if GUI matches the exact output of the ShowSearcherFrontend
+     * method
+     * @return T/F
+     */
+    public static boolean test6(){
+        ShowSearcherBackend backend = new ShowSearcherBackend();
+        ShowSearcherFrontend frontend = new ShowSearcherFrontend("q\n", backend);
+        TextUITester testerUI = new TextUITester("1");
+
+        frontend.toggleFilter(); // Run method
+        String OP = testerUI.checkOutput();// Store output
+
+        if(!OP.contains("1) _x_"))
+            return false;
+        
+        return true;
+        
+    }
+
+    
+    /**
+     * Tests if frontend's yearSearch produces the correct
+     * shows when given a year as input - this function was having
+     * issues early in our testing that we were forced to resolve
+     * and to see if program
+     * follows the correct procedures and 
+     * returns the correct output
+     * If certain phrases from the GUI are not printed the tester will check
+     * and return false
+     * Return true if GUI matches the exact output of the ShowSearcherFrontend
+     * method
+     * @return T/F
+     */
+    public static boolean test7() throws FileNotFoundException{
+
+        IShowLoader loader = new ShowLoader();
+        List<IShow> shows = loader.loadShows("tv_shows.csv");
+        IShowSearcherBackend backend = new ShowSearcherBackend();
+        for(IShow show : shows) backend.addShow(show);
+        IShowSearcherFrontend frontend = new ShowSearcherFrontend("2018\n", backend);
+
+        //ShowSearcherBackend backend = new ShowSearcherBackend();
+        //ShowSearcherFrontend frontend = new ShowSearcherFrontend("2018\n", backend);
+        TextUITester testerUI = new TextUITester("");
+        
+        //backend.searchByYear(2018); // Run method
+        frontend.yearSearch();
+        String OP = testerUI.checkOutput();// Store output
+
+        //Check output with that that should have printed
+        if(!OP.contains("Found 425/5282 matches.")
+            || (!OP.contains("1. Cobra Kai"))
+            || (!OP.contains("419. It's Alive with Brad"))
+            || (!OP.contains("425. Fearless Adventures with Jack Randall")))
+            {
+                return false;
+            }
+            return true;
+    }
+
+    /**
+     * Tests if backend's searchByYear uses the correct
+     * year and returns the correct year when calling the
+     * accessor method getYear()
+     * @return T/F
+     */
+    public static boolean test8() throws FileNotFoundException{
+        IShowLoader loader = new ShowLoader();
+        List<IShow> shows = loader.loadShows("tv_shows.csv");
+        IShowSearcherBackend backend = new ShowSearcherBackend();
+        for(IShow show : shows) backend.addShow(show);
+        IShowSearcherFrontend frontend = new ShowSearcherFrontend("2015\n", backend);
+
+        List<IShow> results = backend.searchByYear(2015);
+
+        for(IShow show : results){
+            if(show.getYear() != 2015) return false;
+        }
+
+        return true;
+    }
+
+    
+    /**
+     * Tests if backend's searchByTitleWord uses the correct
+     * year and returns the correct year when calling the
+     * accessor method getTitle()
+     * @return T/F
+     */
+    public static boolean test9() throws FileNotFoundException{
+        IShowLoader loader = new ShowLoader();
+        List<IShow> shows = loader.loadShows("tv_shows.csv");
+        IShowSearcherBackend backend = new ShowSearcherBackend();
+        for(IShow show : shows) backend.addShow(show);
+        IShowSearcherFrontend frontend = new ShowSearcherFrontend("Attack\n", backend);
+
+        List<IShow> results = backend.searchByTitleWord("Attack");
+
+        if(!results.get(0).getTitle().equals("Attack on Titan"))
+            return false;
+
+        /*
+        1. Attack on Titan
+                95/100 (2013) on: Netflix Hulu 
+        2. November 13: Attack on Paris
+                63/100 (2018) on: Netflix 
+        3. Attack on Titan: Junior High
+                55/100 (2015) on: Hulu 
+        4. Shark Attack Files
+                45/100 (2021) on: Disney+ 
+        5. When Sharks Attack
+                42/100 (2013) on: Hulu Disney+ 
+        */
+        
+
         return true;
     }
     
 
-    public static void main(String args[]){
-        System.out.println(test1());
-        System.out.println(test2());
-        System.out.println(test3());
-        System.out.println(test4());
-        System.out.println(test5());
+
+    public static void main(String args[]) throws FileNotFoundException{
+        System.out.println("runCommandLoop: " + test1());
+        System.out.println("toggleFilter: " + test2());
+        System.out.println("displayShows: " + test3());
+        System.out.println("titleSearch: " + test4());
+        System.out.println("yearSearch: " + test5());
+        System.out.println("toggleFilter2: " + test6());
+        System.out.println("yearSearch2: " + test7());
+        System.out.println("getYear: " + test8());
+        System.out.println("getTitle: " + test9());
+
+
     }
 }
