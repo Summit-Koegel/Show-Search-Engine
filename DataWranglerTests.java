@@ -2,12 +2,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
-// --== CS400 Project NUMBER File Header ==--
-// Name: Aaryush Gupta
-// CSL Username: aaryush
-// Email: agupta276@wisc.edu
-// Lecture #: 004
-// Notes to Grader: <any optional extra notes to your grader>
+
 public class DataWranglerTests {
   public static void main(String[] args) {
     System.out.println("Show constructor: " + test1());
