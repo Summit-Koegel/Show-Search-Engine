@@ -1,10 +1,3 @@
-// --== CS400 Project One File Header ==--
-// Name: Corey Johnsen
-// CSL Username: johnsen
-// Email: cjjohnsen@wisc.edu
-// Lecture #: 004 @4:00pm
-// Notes to Grader: N/A
-
 public class KeyValuePair <KeyType, ValueType> {
 
 	private KeyType key;
