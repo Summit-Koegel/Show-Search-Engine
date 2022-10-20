@@ -1,10 +1,3 @@
-// --== CS400 Project One File Header ==--
-// Name: Corey Johnsen
-// CSL Username: johnsen
-// Email: cjjohnsen@wisc.edu
-// Lecture #: 004 @4:00pm
-// Notes to Grader: N/A
-
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.ArrayList;
